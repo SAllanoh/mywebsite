@@ -21,8 +21,3 @@ A professional, minimalist business website for MediaDev, focusing on Web Design
 - Workflow Automations
 - eCommerce Integrations
 - Maintenance & Support
-
-## Contact
-- **Email:** admin@mediadev.co.ke
-- **Phone:** 0740845203
-- **Location:** Innovators Apartments, Nyeri
