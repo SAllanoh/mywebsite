@@ -1,17 +1,16 @@
-import { GoogleGenAI, Type, Schema } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { AutomationPlan } from '../types';
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
-
 export const generateAutomationPlan = async (userPrompt: string): Promise<AutomationPlan> => {
+  const apiKey = process.env.API_KEY || '';
   if (!apiKey) {
     throw new Error("API Key is missing. Please configure the environment.");
   }
 
-  const modelId = "gemini-2.5-flash";
+  const ai = new GoogleGenAI({ apiKey });
+  const modelId = "gemini-3-flash-preview";
 
-  const responseSchema: Schema = {
+  const responseSchema = {
     type: Type.OBJECT,
     properties: {
       title: { type: Type.STRING, description: "A catchy title for the automation workflow" },
@@ -50,7 +49,6 @@ export const generateAutomationPlan = async (userPrompt: string): Promise<Automa
         systemInstruction,
         responseMimeType: "application/json",
         responseSchema: responseSchema,
-        temperature: 0.7,
       },
     });
 
