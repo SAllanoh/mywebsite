@@ -1,11 +1,28 @@
-<div align="center">
+# MediaDev - Digital Solutions & Automations
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+A professional, minimalist business website for MediaDev, focusing on Web Design, Development, and Workflow Automations.
 
-  <h1>Built with AI Studio</h2>
+## Tech Stack
+- **Framework:** React 19
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **AI Integration:** Google Gemini API
+- **Language:** TypeScript
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Setup
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Services
+- Website Design
+- Web Development
+- Customer Relations Chatbots
+- Workflow Automations
+- eCommerce Integrations
+- Maintenance & Support
 
-</div>
+## Contact
+- **Email:** admin@mediadev.co.ke
+- **Phone:** 0740845203
+- **Location:** Innovators Apartments, Nyeri
