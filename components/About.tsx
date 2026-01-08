@@ -29,7 +29,7 @@ export const About: React.FC = () => {
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-dark-800 pt-8">
               <div>
-                <h4 className="text-3xl font-bold text-white mb-1">50+</h4>
+                <h4 className="text-3xl font-bold text-white mb-1">10+</h4>
                 <p className="text-sm text-gray-500 font-medium">Projects Delivered</p>
               </div>
               <div>

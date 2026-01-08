@@ -23,6 +23,6 @@ A professional, minimalist business website for MediaDev, focusing on Web Design
 - Maintenance & Support
 
 ## Contact
-- **Email:** admin@mediadev.co.ke
+- **Email:** allanshukoki21@gmail.com
 - **Phone:** 0740845203
 - **Location:** Innovators Apartments, Nyeri

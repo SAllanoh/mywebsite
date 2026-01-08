@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Services } from './components/Services';
+import { Portfolio } from './components/Portfolio';
 import { Contact } from './components/Contact';
 
 const App: React.FC = () => {
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Hero />
         <About />
         <Services />
+        <Portfolio />
         <Contact />
       </main>
       <footer className="py-12 text-center text-dark-700 text-sm border-t border-dark-800 bg-dark-950">

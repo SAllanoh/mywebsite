@@ -22,7 +22,7 @@ export const Contact: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Email Us</h3>
             <p className="text-gray-400 mb-4">Our team is available to answer your technical queries via email.</p>
-            <span className="text-brand-400 font-medium text-lg">admin@mediadev.co.ke</span>
+            <a href="mailto:allanshukoki21@gmail.com" className="text-brand-400 font-medium text-lg hover:text-brand-300 transition-colors">allanshukoki21@gmail.com</a>
           </div>
 
           {/* Phone Card */}
