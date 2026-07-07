@@ -1,9 +1,17 @@
 import React from 'react';
 import { Cpu } from 'lucide-react';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onLogoClick?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onLogoClick }) => {
   const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (onLogoClick) {
+      onLogoClick();
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (

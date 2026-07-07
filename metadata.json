@@ -1,5 +1,6 @@
 {
   "name": "MediaDev",
   "description": "MediaDev - Website Design, Development, and Automation Solutions.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }
