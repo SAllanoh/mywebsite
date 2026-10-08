@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
 import { Services } from './components/Services';
 import { Portfolio } from './components/Portfolio';
+import { AutomationPlanner } from './components/AutomationPlanner';
+import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { ArrowUpRight } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [path, setPath] = React.useState<string>(() => {
-    const cleanPath = window.location.pathname.toLowerCase().replace(/\/+$/, '');
-    return cleanPath || '/';
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    const raw = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+    return raw || '/';
   });
 
-  React.useEffect(() => {
-    const handleLocationChange = () => {
-      const cleanPath = window.location.pathname.toLowerCase().replace(/\/+$/, '');
-      setPath(cleanPath || '/');
+  useEffect(() => {
+    const syncRoute = () => {
+      const raw = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      setCurrentPath(raw || '/');
     };
 
-    window.addEventListener('popstate', handleLocationChange);
-    // Listen to custom pushstate triggers
-    window.addEventListener('pushstate', handleLocationChange);
+    window.addEventListener('popstate', syncRoute);
+    window.addEventListener('pushstate', syncRoute);
 
     return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('pushstate', handleLocationChange);
+      window.removeEventListener('popstate', syncRoute);
+      window.removeEventListener('pushstate', syncRoute);
     };
   }, []);
 
@@ -35,40 +36,155 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const isPrivacyPage = path === '/privacy-policy';
+  const isPrivacyPage = currentPath === '/privacy-policy';
+
+  const scrollToSection = (id: string) => {
+    if (isPrivacyPage) {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <div className="min-h-screen bg-dark-900 text-white font-sans selection:bg-brand-500 selection:text-white">
-      <Header onLogoClick={() => navigate('/')} />
+    <div className="min-h-screen bg-canvas text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
+      <Header 
+        onNavigateHome={() => navigate('/')} 
+        isPrivacyPage={isPrivacyPage}
+      />
+
       {!isPrivacyPage ? (
         <main>
           <Hero />
-          <About />
           <Services />
           <Portfolio />
+          <AutomationPlanner />
+          <About />
           <Contact />
         </main>
       ) : (
         <PrivacyPolicy onBack={() => navigate('/')} />
       )}
-      <footer className="py-12 text-center text-dark-700 text-sm border-t border-dark-800 bg-dark-950">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="mb-4 text-gray-500">Transforming local businesses into digital powerhouses.</p>
-          <p className="font-medium mb-4">&copy; {new Date().getFullYear()} MediaDev. All rights reserved.</p>
-          <div className="flex justify-center items-center gap-4 text-xs text-gray-400">
-            <button 
-              onClick={() => navigate('/')} 
-              className="hover:text-brand-400 transition-colors cursor-pointer font-medium"
-            >
-              Home
-            </button>
-            <span className="text-dark-800">|</span>
-            <button 
-              onClick={() => navigate('/privacy-policy')} 
-              className="hover:text-brand-400 transition-colors cursor-pointer font-medium"
-            >
-              Privacy Policy
-            </button>
+
+      {/* Elevated Studio Footer */}
+      <footer className="py-16 bg-canvas-deep border-t border-canvas-border text-slate-400 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-canvas-subtle">
+            
+            {/* Brand column (5 cols) */}
+            <div className="md:col-span-5 space-y-4">
+              <button 
+                onClick={() => navigate('/')}
+                className="font-display font-extrabold text-2xl text-white tracking-tight text-left cursor-pointer focus:outline-none flex items-center gap-1.5"
+              >
+                <span>MediaDev</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-glow" aria-hidden="true" />
+              </button>
+              <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
+                Bespoke web applications, high-converting platforms, and self-driving business automations engineered for operational velocity.
+              </p>
+              <div className="font-mono text-xs text-slate-500">
+                Innovators Apartments, Nyeri, Kenya
+              </div>
+            </div>
+
+            {/* Quick Links (4 cols) */}
+            <div className="md:col-span-4 space-y-3">
+              <div className="font-mono uppercase tracking-wider text-slate-300 text-xs font-semibold">
+                Navigation
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-slate-400 text-xs">
+                <button 
+                  onClick={() => scrollToSection('capabilities')} 
+                  className="text-left hover:text-white transition-colors cursor-pointer py-1"
+                >
+                  Capabilities
+                </button>
+                <button 
+                  onClick={() => scrollToSection('work')} 
+                  className="text-left hover:text-white transition-colors cursor-pointer py-1"
+                >
+                  Selected Work
+                </button>
+                <button 
+                  onClick={() => scrollToSection('automations')} 
+                  className="text-left hover:text-white transition-colors cursor-pointer py-1"
+                >
+                  Automation Studio
+                </button>
+                <button 
+                  onClick={() => scrollToSection('studio')} 
+                  className="text-left hover:text-white transition-colors cursor-pointer py-1"
+                >
+                  Studio Standards
+                </button>
+                <button 
+                  onClick={() => scrollToSection('inquiry')} 
+                  className="text-left hover:text-white transition-colors cursor-pointer py-1"
+                >
+                  Project Consultation
+                </button>
+                <button 
+                  onClick={() => navigate('/privacy-policy')} 
+                  className="text-left hover:text-accent-glow transition-colors cursor-pointer py-1 font-medium"
+                >
+                  Privacy Policy
+                </button>
+              </div>
+            </div>
+
+            {/* Live Client Deployments (3 cols) */}
+            <div className="md:col-span-3 space-y-3">
+              <div className="font-mono uppercase tracking-wider text-slate-300 text-xs font-semibold">
+                Client Platforms
+              </div>
+              <div className="space-y-1.5 text-xs font-mono">
+                <div>
+                  <a href="https://florealtors.co.ke" target="_blank" rel="noopener noreferrer" className="hover:text-accent-glow inline-flex items-center gap-1 text-slate-400">
+                    florealtors.co.ke <ArrowUpRight size={11} />
+                  </a>
+                </div>
+                <div>
+                  <a href="https://engineeringsafety.co.ke" target="_blank" rel="noopener noreferrer" className="hover:text-accent-glow inline-flex items-center gap-1 text-slate-400">
+                    engineeringsafety.co.ke <ArrowUpRight size={11} />
+                  </a>
+                </div>
+                <div>
+                  <a href="https://abilityinnovations.co.ke" target="_blank" rel="noopener noreferrer" className="hover:text-accent-glow inline-flex items-center gap-1 text-slate-400">
+                    abilityinnovations.co.ke <ArrowUpRight size={11} />
+                  </a>
+                </div>
+                <div>
+                  <a href="https://emergeforpurpose.org" target="_blank" rel="noopener noreferrer" className="hover:text-accent-glow inline-flex items-center gap-1 text-slate-400">
+                    emergeforpurpose.org <ArrowUpRight size={11} />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-xs">
+            <div>
+              &copy; {new Date().getFullYear()} MediaDev Digital Engineering. All rights reserved.
+            </div>
+
+            <div className="flex items-center gap-6 font-mono text-[11px]">
+              <button 
+                onClick={() => navigate('/privacy-policy')} 
+                className="hover:text-slate-300 transition-colors cursor-pointer"
+              >
+                Privacy & Data Policy
+              </button>
+              <span>·</span>
+              <span className="text-slate-400">Direct Engineering: allanshukoki21@gmail.com</span>
+            </div>
           </div>
         </div>
       </footer>
